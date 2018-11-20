@@ -1,6 +1,6 @@
 <template>
   <v-app>
-    <v-toolbar app>
+    <v-toolbar dark>
       <!-- TODO menu here -->
     </v-toolbar>
     <v-content>
