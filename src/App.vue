@@ -1,6 +1,8 @@
 <template>
   <v-app>
-    <v-toolbar app></v-toolbar>
+    <v-toolbar app>
+      <!-- TODO menu here -->
+    </v-toolbar>
     <v-content>
       <v-container fluid>
         <router-view></router-view>
@@ -17,12 +19,4 @@ export default {
 </script>
 
 <style>
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
 </style>
