@@ -9,7 +9,7 @@
           </v-card-text>
 
           <!-- TODO add submit event to form -->
-          <form>
+          <form class="flex sm12 offset-md3 md6">
             <v-text-field
               v-validate="'required|email'"
               v-model="email"
@@ -30,7 +30,7 @@
             ></v-text-field>
 
 
-            <v-card-actions class="pa-0 mb-2">
+            <v-card-actions class="pa-0 mb-2 mt-4">
               <v-btn flat color="orange" @click.prevent="login">Login</v-btn>
               <v-btn flat color="orange" @click.prevent="signUp">Sign up</v-btn>
             </v-card-actions>
