@@ -67,12 +67,18 @@ export default {
       this.$validator.validateAll().then(() => {
         if (!this.$validator.errors.any()) {
           // TODO submit login
-          alert('Login');
+          this.$store.dispatch('loginUser', {
+            email: this.email,
+            password: this.password,
+          })
+            .then(() => {
+              this.$router.push({ path: '/' });
+            });
         }
       });
     },
     signUp() {
-      this.$router.push({ name: 'SignUp' });
+      this.$router.push({ path: '/' });
     },
   },
 };

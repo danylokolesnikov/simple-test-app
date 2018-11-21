@@ -80,7 +80,13 @@ export default {
       this.$validator.validateAll().then(() => {
         if (!this.$validator.errors.any()) {
           // TODO register user
-          alert('Register');
+          this.$store.dispatch('signUserUp', {
+            email: this.email,
+            password: this.password,
+          })
+            .then(() => {
+              this.$router.push({ name: 'Login' });
+            });
         }
       });
     },
