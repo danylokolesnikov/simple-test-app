@@ -40,7 +40,7 @@
 
 
             <v-card-actions class="pa-0 mb-2 mt-4">
-              <v-btn flat color="orange" @click.prevent="register">Registration</v-btn>
+              <v-btn flat color="orange" @click.prevent="signUp">Register</v-btn>
               <v-btn flat color="orange" @click.prevent="login">Login</v-btn>
             </v-card-actions>
           </form>
@@ -55,9 +55,9 @@
 import dictionary from '@/utils/dictionary';
 
 export default {
-  name: 'Login',
+  name: 'SignUp',
   $_veeValidate: {
-    validator: 'new',
+    validator: 'SignUp',
   },
   data() {
     return {

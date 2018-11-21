@@ -48,7 +48,7 @@ import dictionary from '@/utils/dictionary';
 export default {
   name: 'Login',
   $_veeValidate: {
-    validator: 'new',
+    validator: 'Login',
   },
   data() {
     return {
