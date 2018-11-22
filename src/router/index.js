@@ -6,6 +6,7 @@ import Login from '@/components/User/Login';
 import SignUp from '@/components/User/SignUp';
 
 import authenticated from '@/middleware/authenticated';
+import auth from '@/middleware/auth';
 
 Vue.use(Router);
 
@@ -28,6 +29,7 @@ const router = new Router({
       path: '/login',
       name: 'Login',
       component: Login,
+      beforeEnter: auth,
     },
     {
       path: '/signup',

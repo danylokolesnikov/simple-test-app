@@ -55,15 +55,35 @@ export const store = new Vuex.Store({
       return firebase.auth().createUserWithEmailAndPassword(data.email, data.password)
         .then(
           user => {
-            firebase.auth().currentUser.updateProfile({
-                displayName: data.username,
+            return new Promise(( resolve, reject ) => {
+              firebase.auth().currentUser.updateProfile({
+                  displayName: data.username,
+              })
+              .then(
+                () => {
+                  console.log(user.user.displayName, 'Promise');
+                  resolve(user);
+                }
+              )
+              .catch(
+                error => {
+                  reject(error);
+                }
+              )
             });
+          }
+        )
+        .then(
+          user => {
+            console.log(user.user.displayName, 'ZEN');
             commit('setError', null);
             commit('changeLoadingStatus', false);
             const newUser = {
-              id: user.uid,
+              id: user.user.uid,
             };
-            commit('setUser', newUser);
+            commit('setUser', newUser.id);
+            commit('setUserData', { email: user.user.email, name: user.user.displayName });
+
           }
         )
         .catch(
