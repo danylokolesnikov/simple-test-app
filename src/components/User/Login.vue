@@ -78,7 +78,7 @@ export default {
       });
     },
     signUp() {
-      this.$router.push({ path: '/' });
+      this.$router.push({ name: 'SignUp' });
     },
   },
 };

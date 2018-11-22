@@ -15,9 +15,7 @@ const router = new Router({
       path: '/',
       name: 'ProfileEmail',
       component: ProfileEmail,
-      meta: {
-        middleware: authenticated,
-      },
+      beforeEnter: authenticated,
     },
     {
       path: '/login',
@@ -32,11 +30,11 @@ const router = new Router({
   ],
 });
 
-router.beforeEach((to, from, next) => {
-  if (to.meta.middleware) {
-    to.meta.middleware({ next, router });
-  }
-  return next();
-});
+// router.beforeEach((to, from, next) => {
+//   if (to.meta.middleware) {
+//     to.meta.middleware({ next, router });
+//   }
+//   return next();
+// });
 
 export default router;
