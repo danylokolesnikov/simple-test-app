@@ -9,6 +9,7 @@ import 'firebase/auth';
 import App from './App';
 import { store } from './store';
 import router from './router';
+import config from './config/firebase';
 
 Vue.use(Vuetify);
 Vue.use(VeeValidate);
@@ -23,14 +24,7 @@ new Vue({
   components: { App },
   template: '<App/>',
   created() {
-    firebase.initializeApp({
-      apiKey: 'AIzaSyCdThjfpglYCyJRAQhWnQ1KU5YD5yMfUqM',
-      authDomain: 'simple-test-app-5c3a9.firebaseapp.com',
-      databaseURL: 'https://simple-test-app-5c3a9.firebaseio.com',
-      projectId: 'simple-test-app-5c3a9',
-      storageBucket: '',
-      messagingSenderId: '798695947037',
-    });
+    firebase.initializeApp(config);
 
     firebase.auth().onAuthStateChanged((user) => {
       if (user) {
