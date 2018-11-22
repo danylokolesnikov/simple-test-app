@@ -85,7 +85,9 @@ export default {
             password: this.password,
           })
             .then(() => {
-              this.$router.push({ path: '/' });
+              if (!this.error) {
+                this.$router.push({ path: '/' });
+              }
             });
         }
       });

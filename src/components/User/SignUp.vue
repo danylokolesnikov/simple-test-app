@@ -99,6 +99,7 @@ export default {
           this.$store.dispatch('signUserUp', {
             email: this.email,
             password: this.password,
+            username: this.name,
           })
             .then(() => {
               if (!this.error) {

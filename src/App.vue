@@ -10,7 +10,7 @@
       ></v-progress-circular>
     </div>
     <v-toolbar dark>
-      <!-- TODO menu here -->
+      <app-menu v-if="user"></app-menu>
     </v-toolbar>
     <v-content>
       <v-container fluid>
@@ -22,8 +22,25 @@
 </template>
 
 <script>
+import AppMenu from '@/components/Partials/AppMenu';
+
 export default {
   name: 'App',
+  components: {
+    AppMenu,
+  },
+  computed: {
+    user() {
+      return this.$store.state.user;
+    },
+  },
+  watch: {
+    '$store.state.user': function checkLogin(newValue) {
+      if (!newValue) {
+        this.$router.push({ path: '/login' });
+      }
+    },
+  },
 };
 </script>
 

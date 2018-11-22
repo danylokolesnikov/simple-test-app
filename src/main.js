@@ -35,6 +35,7 @@ new Vue({
     firebase.auth().onAuthStateChanged((user) => {
       if (user) {
         this.$store.commit('setUser', user.uid);
+        this.$store.commit('setUserData', { email: user.email, name: user.displayName });
       }
     });
   },

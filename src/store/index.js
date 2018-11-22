@@ -8,6 +8,7 @@ Vue.use(Vuex);
 export const store = new Vuex.Store({
   state: {
     user: null,
+    userData: {},
     error: null,
     loading: false,
   },
@@ -16,8 +17,12 @@ export const store = new Vuex.Store({
       state.user = user;
       localStorage.setItem('user', user);
     },
+    setUserData(state, userData) {
+      state.userData = userData;
+    },
     setError(state, error) {
       state.error = error;
+      localStorage.removeItem('user');
     },
     clearError(state) {
       state.error = null;
@@ -27,16 +32,32 @@ export const store = new Vuex.Store({
     },
     removeUser(state) {
       state.user = null;
+      state.userData = {};
       localStorage.removeItem('user');
     }
   },
   actions: {
+    signUserOut({commit}) {
+      console.log(this);
+      firebase.auth().signOut()
+        .then(() => {
+          // complete
+          commit('removeUser');
+        })
+        .catch(() => {
+          // error
+          commit('setError', error);
+          console.log(error);
+        })
+    },
     signUserUp ({commit}, data) {
       commit('changeLoadingStatus', true);
       return firebase.auth().createUserWithEmailAndPassword(data.email, data.password)
         .then(
           user => {
-            console.log('then in store')
+            firebase.auth().currentUser.updateProfile({
+                displayName: data.username,
+            });
             commit('setError', null);
             commit('changeLoadingStatus', false);
             const newUser = {
@@ -70,9 +91,12 @@ export const store = new Vuex.Store({
           error => {
             commit('changeLoadingStatus', false);
             commit('setError', error);
-            console.log(error);
+            console.error(error);
           }
         )
     },
+    getUserName({commit}) {
+      firebase.auth().currentUser
+    }
   },
 });

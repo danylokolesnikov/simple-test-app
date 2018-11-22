@@ -1,6 +1,7 @@
 import Vue from 'vue';
 import Router from 'vue-router';
 import ProfileEmail from '@/components/User/ProfileEmail';
+import ProfileName from '@/components/User/ProfileName';
 import Login from '@/components/User/Login';
 import SignUp from '@/components/User/SignUp';
 
@@ -18,6 +19,12 @@ const router = new Router({
       beforeEnter: authenticated,
     },
     {
+      path: '/name',
+      name: 'ProfileName',
+      component: ProfileName,
+      beforeEnter: authenticated,
+    },
+    {
       path: '/login',
       name: 'Login',
       component: Login,
@@ -29,12 +36,5 @@ const router = new Router({
     },
   ],
 });
-
-// router.beforeEach((to, from, next) => {
-//   if (to.meta.middleware) {
-//     to.meta.middleware({ next, router });
-//   }
-//   return next();
-// });
 
 export default router;

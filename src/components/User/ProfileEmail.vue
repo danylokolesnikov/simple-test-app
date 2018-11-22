@@ -1,13 +1,22 @@
 <template lang="html">
   <div class="email">
-    Profile Email
+    Profile Email: {{email}}
   </div>
 </template>
 
 <script>
+import firebase from '@/main';
+
 export default {
   data() {
-    return {};
+    return {
+      currentUser: firebase,
+    };
+  },
+  computed: {
+    email() {
+      return this.$store.state.userData.email;
+    },
   },
 };
 </script>
