@@ -1,5 +1,10 @@
 <template lang="html">
   <div class="signup">
+    <v-layout row v-if="error">
+      <v-flex xs12 sm6 offset-sm3>
+        <app-alert @dismissed="onDismissed" :text="error.message"></app-alert>
+      </v-flex>
+    </v-layout>
     <v-layout>
       <v-flex xs12 sm6 offset-sm3>
         <v-card class="pa-2">
@@ -53,6 +58,7 @@
 
 <script>
 import dictionary from '@/utils/dictionary';
+import AppAlert from '@/components/Partials/AppAlert';
 
 export default {
   name: 'SignUp',
@@ -71,8 +77,18 @@ export default {
   mounted() {
     this.$validator.localize('en', this.dictionary);
   },
-
+  computed: {
+    error() {
+      return this.$store.state.error;
+    },
+  },
+  components: {
+    AppAlert,
+  },
   methods: {
+    onDismissed() {
+      this.$store.commit('clearError');
+    },
     login() {
       this.$router.push({ name: 'Login' });
     },
@@ -85,7 +101,9 @@ export default {
             password: this.password,
           })
             .then(() => {
-              this.$router.push({ name: 'Login' });
+              if (!this.error) {
+                this.$router.push({ name: 'Login' });
+              }
             });
         }
       });

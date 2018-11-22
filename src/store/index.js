@@ -37,6 +37,7 @@ export const store = new Vuex.Store({
         .then(
           user => {
             console.log('then in store')
+            commit('setError', null);
             commit('changeLoadingStatus', false);
             const newUser = {
               id: user.uid,
@@ -57,6 +58,7 @@ export const store = new Vuex.Store({
       return firebase.auth().signInWithEmailAndPassword(data.email, data.password)
         .then(
           user => {
+            commit('setError', null);
             commit('changeLoadingStatus', false);
             const newUser = {
               id: user.uid,
